@@ -30,8 +30,8 @@ public class CustomViewGroup extends ViewGroup
     {
         int childCount = getChildCount();
 
-        int prevChildRight = 0;
-        int prevChildBottom = 0;
+        int prevChildRight = getPaddingLeft();
+        int prevChildBottom = getPaddingTop();
 
         for (int i = 0; i < childCount; i++)
         {
@@ -77,10 +77,10 @@ public class CustomViewGroup extends ViewGroup
             }
         }
 
-        if (tmpChild != null)
+        if (tmpChild != null && maxWidth < parentWidth)
         {
             int childWidthSpec = MeasureSpec.makeMeasureSpec(parentWidth - maxWidth, MeasureSpec.EXACTLY);
-            tmpChild.measure(childWidthSpec, heightMeasureSpec);
+            measureChild(tmpChild, childWidthSpec, heightMeasureSpec);
         }
 
         setMeasuredDimension(parentWidth, parentHeight);
